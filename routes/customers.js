@@ -29,7 +29,6 @@ router.post('/', async (req, res) => {
     if (customer) return res.status(400).send('customer already exist.');
     
     customer = new Customer({
-        profilePicture: req.body.profilePicture,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,

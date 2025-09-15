@@ -18,8 +18,10 @@ router.post('/', async (req, res) => {
     const validPassword = await bcrybt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(400).send('invalid email or password.');
 
-    const token = jwt.sign({_id: user._id,name: user.name}, config.get('jwtPrivateKey'));
-    res.send(token)
+    // const token = jwt.sign({_id: user._id,name: user.name}, config.get('jwtPrivateKey'));
+    // res.json({token: token, name: user.name, email: user.email} )
+     const token = user.generateAuthToken();
+    res.json({ token: token, name: user.name, email: user.email });
 });
 
 function validate(req) {

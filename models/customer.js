@@ -1,13 +1,8 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-const { type } = require('joi/lib/types/object');
-const { set } = require('joi/lib/types/lazy');
+
 
 const customerSchema = new mongoose.Schema({
-    profilePicture: {
-        type: String,
-        default: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
-    },
     firstName: {
         type: String,
         required: true,
@@ -63,7 +58,6 @@ const Customer = mongoose.model('Customer', customerSchema);
 
 function validateCustomer(customer) { 
     const schema = {
-        profilePicture: Joi.string(),
         firstName: Joi.string().min(5).max(50).required(),
         lastName: Joi.string().min(5).max(50).required(),
         email: Joi.string().min(5).max(255).required().email(),
