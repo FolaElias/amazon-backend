@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 
 
+
 const customerSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -52,6 +53,10 @@ const customerSchema = new mongoose.Schema({
         type: String,
         required: true, 
     },
+    address: {
+        type: String,
+        required: true
+    }
 });
 
 const Customer = mongoose.model('Customer', customerSchema);
@@ -67,6 +72,7 @@ function validateCustomer(customer) {
         country: Joi.string().required(),
         state: Joi.string().required(),
         city: Joi.string().required(),
+        address: Joi.string().required()
     };
     return Joi.validate(customer, schema);
 }

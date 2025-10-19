@@ -7,7 +7,12 @@ const customer = require('./routes/customers');
 const config = require('config');
 const user = require('./routes/users');
 const auth = require('./routes/auth');
-const cart = require('./routes/carts');
+const cart = require('./routes/carts')
+const order = require('./routes/orders');
+const category = require('./routes/categories')
+const location = require('./routes/distributorsLocation');
+const { required } = require("joi/lib/types/object");
+require('dotenv').config();
 
 if (!config.get("jwtPrivateKey")) {
   console.error("FATAL ERROR: jwtPrivateKey is not defined.");
@@ -26,6 +31,13 @@ app.use('/amazon/document/api/customers', customer);
 app.use('/amazon/document/api/register', user);
 app.use('/amazon/document/api/login', auth);
 app.use('/amazon/document/api/carts', cart);
+app.use('/amazon/document/api/orders', order);
+app.use('/amazon/document/api/locations', location);
+app.use('/amazon/document/api/categories', category);
+
+
+
+
 
 const port = process.env.PORT || 3001
 

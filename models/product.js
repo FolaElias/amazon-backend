@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
-const Joi = require('joi')
+const Joi = require('joi');
+const {categorySchema} = require('./category')
+
+
 
 const productSchema= new mongoose.Schema({
     name: {
@@ -8,8 +11,25 @@ const productSchema= new mongoose.Schema({
         Minlength: 5,
         Maxlenght: 50,
     },
+    category: {
+        type: categorySchema,
+            required: true
+    },
     image: {
+        type: [String],
+        required: true
+    },
+    benefits: {
         type: String,
+        required: true
+    },
+    variety: {
+        type: [String],
+        required: true
+    },
+
+    ingridients: {
+        type: [String],
         required: true
     },
     price: {
@@ -39,7 +59,11 @@ const Product = mongoose.model('Product', productSchema)
 function validateProduct(product) {
     const schema = {
         name: Joi.string().min(5).max(50).required(),
-        image: Joi.string().required(),
+        categoryId: Joi.string().required(),
+        image: Joi.array().required(),
+        benefits: Joi.string().required(),
+        variety: Joi.array().required(),
+        ingridients: Joi.array().required(),
         price: Joi.string().required(),
         description: Joi.string().min(10).max(500).required(),
         // rating: Joi.string().boolen(),

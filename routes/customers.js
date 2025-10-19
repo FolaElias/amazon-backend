@@ -37,7 +37,8 @@ router.post('/', async (req, res) => {
         gender: req.body.gender,
         country: req.body.country,
         state: req.body.state,
-        city: req.body.city
+        city: req.body.city,
+        address: req.body.address
     });
     customer = await customer.save()
     res.send(customer)
@@ -57,7 +58,8 @@ router.put('/:id', async (req, res) => {
         gender: req.body.gender,
         country: req.body.country,
         state: req.body.state,
-        city: req.body.city
+        city: req.body.city,
+        address: req.body.address
     },
         { new: true });
     if (!customer) return res.status(400).send('customer with the given id not found');
